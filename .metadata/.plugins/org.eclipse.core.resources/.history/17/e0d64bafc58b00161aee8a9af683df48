@@ -19,23 +19,24 @@ import org.json.simple.parser.ParseException;
 
 public class APIFileIO {
 	protected static void writeToWebpage(HttpURLConnection connection) throws IOException, ParseException {
-
-		// Making new file to write to.
 		Path testHTMLPath = Paths.get("\\Users\\admin\\functionalFitness\\fITnessapp\\src\\main\\webapp\\apitest.html");
 		File testHTMLFile = testHTMLPath.toFile();
-
-		// reading API response into buffer
+		// read response into buffer
 		BufferedReader jsonReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-		// parsing API response into JSON object and putting it into array
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonReader);
+
+		// get an array from the JSON object
 		JSONArray results = (JSONArray) jsonObject.get("results");
 
-		// looking through array for the specified fields and writing it to file
 		Iterator<?> i = results.iterator();
+
+		// take each value from the json array separately
 		while (i.hasNext()) {
 			JSONObject innerObj = (JSONObject) i.next();
+			// System.out.println("NAME: "+ innerObj.get("name")+"\n
+			// Description" + innerObj.get("description")+"\n");
 			try (PrintWriter out = new PrintWriter(new BufferedWriter((new FileWriter(testHTMLFile, true))))) {
 				out.println(innerObj.get("name") + "\n" + innerObj.get("description") + "\n");
 			} catch (IOException e) {
@@ -44,5 +45,6 @@ public class APIFileIO {
 
 		}
 	}
+
 
 }

@@ -10,12 +10,8 @@ public class Fitnessapp {
 		Scanner sc = new Scanner(System.in);
 		String userInput = null;
 
-		// getting user input and changing it to the correct id for the API,
-		// then calling the api method with correct user input
-
 		System.out.println(
 				"Please provide the equipment that you currently have access to with a 1 for yes or a 2 for no");
-
 		System.out.println("Do you have access to a barbell?");
 		userInput = sc.nextLine();
 		if (userInput.equals("1")) {
