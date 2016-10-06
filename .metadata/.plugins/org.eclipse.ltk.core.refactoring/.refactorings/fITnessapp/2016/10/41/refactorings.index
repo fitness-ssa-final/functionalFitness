@@ -3,3 +3,4 @@
 1475679365960	Rename package 'com.apip'
 1475679493986	Rename package 'dao'
 1475679555427	Rename package 'fitnessapp'
+1475732794882	Extract method 'writeToWebpage'

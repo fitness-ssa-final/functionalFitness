@@ -1,6 +1,5 @@
 package com.fitnessapp;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.api.ConnectToWgerAPI;
@@ -10,10 +9,6 @@ public class Fitnessapp {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String userInput = null;
-		ArrayList<String> listOfExercises = new ArrayList<String>();
-
-		// userInput= sc.nextLine();
-		// ConnectToWgerAPI.connectingToWgerAPI(userInput);
 
 		System.out.println(
 				"Please provide the equipment that you currently have access to with a 1 for yes or a 2 for no");
@@ -80,7 +75,7 @@ public class Fitnessapp {
 			ConnectToWgerAPI.connectingToWgerAPI(userInput);
 		}
 
-		System.out.println("Please put a 1 here if you have no equipment");
+		System.out.println("Would you also like to body do weight exercises?");
 		userInput = sc.nextLine();
 		if (userInput.equals("1")) {
 			userInput = "7";
