@@ -1,0 +1,2 @@
+127.0.0.1 - - [06/Oct/2016:01:30:48 -0400] "GET / HTTP/1.1" 404 998
+0:0:0:0:0:0:0:1 - - [06/Oct/2016:01:30:52 -0400] "GET /fITnessapp/WEB-INF/classes/com/api/ConnectToWgerAPI.java HTTP/1.1" 404 996

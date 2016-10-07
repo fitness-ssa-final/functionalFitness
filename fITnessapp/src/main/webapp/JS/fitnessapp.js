@@ -1,39 +1,95 @@
-$.get('https://wger.de/api/v2/exercise.json/?language=2&limit=999&equipment=1',
-		function(data) {
-			for (var i = 0; i < data.results.length; i++) {
-				data[i];
 
-				var name = data.results[i].name;
-				console.log('Name : ', name);
+var populateData= $.get('https://wger.de/api/v2/exercise.json/?language=2&limit=1000000&equipment=3',
+        function(data) {
+            var muscleCategories = [{
+                "id": 10,
+                "name": "Abs"
+            }, {
+                "id": 8,
+                "name": "Arms"
+            }, {
+                "id": 12,
+                "name": "Back"
+            }, {
+                "id": 14,
+                "name": "Calves"
+            }, {
+                "id": 11,
+                "name": "Chest"
+            }, {
+                "id": 9,
+                "name": "Legs"
+            }, {
+                "id": 13,
+                "name": "Shoulders"
+            }];
 
-				var description = data.results[i].description;
-				console.log('Description : ', description);
+            var equipmentNames = [{
+                "id": 1,
+                "name": "Barbell"
+            }, {
+                "id": 8,
+                "name": "Bench"
+            }, {
+                "id": 3,
+                "name": "Dumbbell"
+            }, {
+                "id": 4,
+                "name": "Gym mat"
+            }, {
+                "id": 9,
+                "name": "Incline bench"
+            }, {
+                "id": 10,
+                "name": "Kettlebell"
+            }, {
+                "id": 7,
+                "name": "none (bodyweight exercise)"
+            }, {
+                "id": 6,
+                "name": "Pull-up bar"
+            }, {
+                "id": 5,
+                "name": "Swiss Ball"
+            }, {
+                "id": 2,
+                "name": "SZ-Bar"
+            }];
+            for (var i = 0; i < data.results.length; i++) {
 
-				var muscleCategory = data.results[i].category;
-				console.log('Muscle Category : ', muscleCategory);
+                var name = data.results[i].name;
+                var description = data.results[i].description;
+                var muscleCategory = data.results[i].category;
+                var equipment = data.results[i].equipment;
 
-				var equipment = data.results[i].equipment;
-				console.log('Equipment : ', equipment);
-				
-//				if (muscleCategory.equals) {
-//					
-//				} else {
-//
-//				}
+                $.each(muscleCategories, function(key, val) {
+                    if (val.id == muscleCategory) {
+                        muscleCategoryText = val.name;
+                        return true;
+                    }
 
-				var index = equipment.indexOf(1);
-				if (index !== -1) {
-					equipment[index] = "Barbell"
+                });
 
-				}
+                $.each(equipmentNames, function(key, val) {
 
-				$('body').append(
-						"Name:   " + name + '<hr>' + "Directions:   "
-								+ description + '<hr>' + "Muscle Category:   "
-								+ muscleCategory + '<hr>'
-								+ "Equipment Needed:    " + equipment
-								+ '<hr><br><br>');
+                    if (val.id == equipment) {
+                        equipmentText = val.name;
+                        return true;
+                    }
 
-			}
+                });
 
-		});
+
+
+                $('#tableData').append("<tr><td>" + name + "</td><td>" + description + "</td><td>" + muscleCategoryText + "</td><td>" + equipmentText + "</td></tr>");
+
+
+
+
+            }
+
+            $.when(populateData).done(function() {
+              $('#exerciseTable').DataTable();
+            });
+
+        });
