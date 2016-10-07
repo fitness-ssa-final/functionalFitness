@@ -1,9 +1,6 @@
-$(function() {
 
-
-    $.get('https://wger.de/api/v2/exercise.json/?language=2&limit=1000000&equipment=1',
+var populateData= $.get('https://wger.de/api/v2/exercise.json/?language=2&limit=1000000&equipment=3',
         function(data) {
-
             var muscleCategories = [{
                 "id": 10,
                 "name": "Abs"
@@ -61,13 +58,11 @@ $(function() {
             for (var i = 0; i < data.results.length; i++) {
 
                 var name = data.results[i].name;
-
                 var description = data.results[i].description;
                 var muscleCategory = data.results[i].category;
                 var equipment = data.results[i].equipment;
 
                 $.each(muscleCategories, function(key, val) {
-
                     if (val.id == muscleCategory) {
                         muscleCategoryText = val.name;
                         return true;
@@ -85,18 +80,16 @@ $(function() {
                 });
 
 
-                $('#tableData').append("<tr>");
-                $('#tableData').append("<td>" + name + "</td>");
-                $('#tableData').append("<td>" + description + "</td>");
-                $('#tableData').append("<td>" + muscleCategoryText + "</td>");
-                $('#tableData').append("<td>" + equipmentText + "</td>");
-                $('#tableData').append("</tr>");
+
+                $('#tableData').append("<tr><td>" + name + "</td><td>" + description + "</td><td>" + muscleCategoryText + "</td><td>" + equipmentText + "</td></tr>");
+
+
+
 
             }
 
+            $.when(populateData).done(function() {
+              $('#exerciseTable').DataTable();
+            });
+
         });
-
-
-
-
-});
